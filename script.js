@@ -1,56 +1,38 @@
-var element, timer;
-window.onload = function () {
-    element = document.getElementById("timer");
-    timer = new Timer(0);
-};
+var beginCountdown = true;
+window.onload(function(){
+    init(25);
+});
+
 
 function init(type) {
+    element = document.getElementById("timer");
+    timer = new Timer(type); 
   timer.setMinutes(type);
-  setInterval(function () {
-    element.innerHTML = timer.getTimeLeft();
-    let m = timer.getMinutes();
-    let s = timer.getSeconds();
-    let display = timer.getTimeLeft();
+  if(beginCountdown){
+    beginCountdown = false;
+    setInterval(function () {
+        element.innerHTML = timer.getTimeLeft();
+        let m = timer.getMinutes();
+        let s = timer.getSeconds();
+        let display = timer.getTimeLeft();
 
-    if(s <= 60 && !s < 1){
-        timer.setSeconds(--s);
-    }
-    if(s < 1 && s > -1)
-    {
-        timer.setSeconds(59);
-    }
-    if(s < 60 && s > 58) {
-        timer.setMinutes(--m);
-    }
-    if(m < 1 && s < 1)
-    {
-        timer.setSeconds(-1);
-        timer.setMinutes(0);
-    }
-  }, 1000);
-
-  /*function init(type) {
-    timer.setMinutes(type);
-    setInterval(function(){
-      if(timer.getSeconds <= 60 && !timer.getSeconds < 1)
-        {
-            timer.setSeconds(--timer.getSeconds());
-            console.log(timer.getSeconds());   
+        if(s <= 60 && !s < 1){
+            timer.setSeconds(--s);
         }
-        if(timer.getSeconds() < 10)
+        if(s < 1 && s > -1)
         {
-            element.innerHTML = timer.getTimeLeft(); 
-        } else{
-            element.innerHTML = timer.getTimeLeft();
+            timer.setSeconds(59);
         }
-        if(timer.getSeconds() <= 1)
+        if(s < 60 && s > 58) {
+            timer.setMinutes(--m);
+        }
+        if(m < 1 && s < 1)
         {
-            timer.setSeconds()
+            timer.setSeconds(-1);
+            timer.setMinutes(0);
         }
-        if (timer.getSeconds() < 60 && timer.getSeconds() > 58) {
-          timer.setMinutes(--timer.getSeconds())
-        }  
-    }, 1000);*/
+    }, 1000);
+    }
 }
 
 
